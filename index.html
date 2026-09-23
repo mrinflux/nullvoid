@@ -18,15 +18,17 @@
 
   <title>Mrinmoy Singha | Control Systems</title>
 
-  <!-- Sets the theme before the page paints, so there is no light-mode flash -->
   <script>
     (function () {
       try {
         var t = localStorage.getItem("theme");
+
         if (!t && window.matchMedia("(prefers-color-scheme: dark)").matches) {
           t = "dark";
         }
-        document.documentElement.dataset.theme = t === "dark" ? "dark" : "light";
+
+        document.documentElement.dataset.theme =
+          t === "dark" ? "dark" : "light";
       } catch (e) {}
     })();
   </script>
@@ -41,23 +43,14 @@
   <header>
     <div class="container nav">
 
-      <a class="brand" href="#home">Mrinmoy Singha</a>
+      <a class="brand" href="#home">
+        MRINMOY SINGHA
+      </a>
 
       <nav class="nav-links" aria-label="Main navigation">
         <a href="#research">Research</a>
         <a href="#education">Education</a>
         <a href="#publications">Publications</a>
-        <a href="#projects">Projects</a>
-        <a href="#notes">Notes</a>
-
-        <button
-          id="theme"
-          type="button"
-          aria-label="Switch to dark mode"
-          title="Toggle dark mode"
-        >
-          ☾
-        </button>
       </nav>
 
     </div>
@@ -69,7 +62,8 @@
     <!-- ================= HERO ================= -->
 
     <section class="hero" id="home">
-      <div class="container hero-grid">
+
+      <div class="hero-grid container">
 
         <div class="hero-content">
 
@@ -84,9 +78,9 @@
 
           <p class="lead">
             I am a PhD research scholar in Electrical &amp; Electronics
-            Engineering at the Indian Institute of Technology Guwahati. My
-            interests lie in control systems, autonomous systems, robotics,
-            optimization, and mathematical modeling.
+            Engineering at the Indian Institute of Technology Guwahati.
+            My interests lie in control theory, dynamical systems,
+            estimation, optimization, and autonomous systems.
           </p>
 
           <div class="hero-meta">
@@ -96,23 +90,120 @@
           </div>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#research">Explore my research</a>
+            <a class="btn btn-primary" href="#research">
+              Explore my research
+            </a>
           </div>
 
         </div>
 
 
-        <!-- Profile photo -->
+        <!-- CONTROL SYSTEM VISUAL -->
 
-        <div class="photo">
-          <img
-            src="assets/profile.jpeg"
-            alt="Mrinmoy Singha"
-            onerror="this.parentNode.classList.add('no-photo')"
-          />
-          <div class="photo-placeholder" aria-hidden="true">
-            <b>MS</b>
+        <div class="control-visual" aria-label="Animated state-space visualization">
+
+          <div class="visual-label">
+            STATE SPACE
           </div>
+
+          <svg
+            class="phase-portrait"
+            viewBox="0 0 420 420"
+            role="img"
+            aria-label="State trajectory approaching an equilibrium point"
+          >
+
+            <!-- Grid -->
+
+            <g class="grid-lines">
+              <line x1="40" y1="80" x2="380" y2="80"/>
+              <line x1="40" y1="140" x2="380" y2="140"/>
+              <line x1="40" y1="200" x2="380" y2="200"/>
+              <line x1="40" y1="260" x2="380" y2="260"/>
+              <line x1="40" y1="320" x2="380" y2="320"/>
+
+              <line x1="80" y1="40" x2="80" y2="380"/>
+              <line x1="140" y1="40" x2="140" y2="380"/>
+              <line x1="200" y1="40" x2="200" y2="380"/>
+              <line x1="260" y1="40" x2="260" y2="380"/>
+              <line x1="320" y1="40" x2="320" y2="380"/>
+            </g>
+
+            <!-- Axes -->
+
+            <line class="axis" x1="40" y1="210" x2="380" y2="210"/>
+            <line class="axis" x1="210" y1="40" x2="210" y2="380"/>
+
+            <!-- Axis labels -->
+
+            <text x="365" y="202">x₁</text>
+            <text x="218" y="55">x₂</text>
+
+            <!-- Equilibrium -->
+
+            <circle
+              class="equilibrium"
+              cx="210"
+              cy="210"
+              r="5"
+            />
+
+            <circle
+              class="equilibrium-ring"
+              cx="210"
+              cy="210"
+              r="14"
+            />
+
+            <!-- State trajectory -->
+
+            <path
+              class="trajectory"
+              d="
+                M 350 105
+                C 330 70, 275 65, 240 105
+                C 205 145, 245 185, 275 220
+                C 300 250, 260 285, 220 275
+                C 180 265, 155 230, 175 205
+                C 195 180, 230 190, 245 210
+                C 260 230, 235 250, 215 245
+                C 195 240, 190 220, 205 212
+              "
+            />
+
+            <!-- Moving state -->
+
+            <circle
+              class="state-point"
+              r="6"
+            >
+              <animateMotion
+                dur="6s"
+                repeatCount="indefinite"
+                path="
+                  M 350 105
+                  C 330 70, 275 65, 240 105
+                  C 205 145, 245 185, 275 220
+                  C 300 250, 260 285, 220 275
+                  C 180 265, 155 230, 175 205
+                  C 195 180, 230 190, 245 210
+                  C 260 230, 235 250, 215 245
+                  C 195 240, 190 220, 205 212
+                "
+              />
+            </circle>
+
+          </svg>
+
+          <div class="state-equation">
+            ẋ = Ax + Bu
+          </div>
+
+          <div class="visual-status">
+            <span class="status-dot"></span>
+            SYSTEM STABLE
+          </div>
+
         </div>
 
       </div>
@@ -122,84 +213,159 @@
     <!-- ================= RESEARCH ================= -->
 
     <section class="section-alt" id="research">
+
       <div class="container">
 
         <div class="section-header">
           <p class="section-label">01 · Research</p>
-          <h2 class="section-title">Questions I am interested in</h2>
+
+          <h2 class="section-title">
+            Control, dynamics &amp; autonomy
+          </h2>
+
           <p class="section-intro">
-            My current PhD research direction is still being finalized. For now,
-            I am interested in the mathematical and computational side of
-            control and autonomous systems.
+            My current PhD research direction is still being finalized.
+            I am particularly interested in the mathematical and
+            computational side of control and autonomous systems.
           </p>
         </div>
+
 
         <div class="research-grid">
 
           <article class="research-card">
             <span class="project-number">01</span>
+
+            <div class="mini-system">
+              <span>u</span>
+              <i></i>
+              <span>y</span>
+            </div>
+
             <h3>Control Systems</h3>
+
             <p>
-              Linear systems, feedback, estimation, modeling, and
-              computational control.
+              Modeling, feedback, stability, state-space methods,
+              and computational control.
             </p>
           </article>
+
 
           <article class="research-card">
             <span class="project-number">02</span>
-            <h3>Autonomous Systems</h3>
+
+            <div class="mini-response">
+              <svg viewBox="0 0 180 55">
+                <path d="M5 45 C30 45 32 8 58 18 S90 48 112 25 S145 18 175 20"/>
+              </svg>
+            </div>
+
+            <h3>Dynamical Systems</h3>
+
             <p>
-              Control and decision-making for systems operating with limited
-              human intervention.
+              Understanding dynamic behavior through mathematical
+              models, trajectories, and system structure.
             </p>
           </article>
+
 
           <article class="research-card">
             <span class="project-number">03</span>
-            <h3>Optimization</h3>
+
+            <div class="mini-feedback">
+              <span>r</span>
+              <b>⊕</b>
+              <span>G</span>
+              <b>→</b>
+              <span>y</span>
+            </div>
+
+            <h3>Feedback &amp; Estimation</h3>
+
             <p>
-              Optimization-based methods for modeling, estimation, and
-              control.
+              State estimation, feedback architectures, observers,
+              and reconstruction from measurements.
             </p>
           </article>
+
 
           <article class="research-card">
             <span class="project-number">04</span>
-            <h3>Robotics</h3>
+
+            <div class="mini-response">
+              <svg viewBox="0 0 180 55">
+                <path d="M5 45 L55 45 L55 12 L175 12"/>
+              </svg>
+            </div>
+
+            <h3>Optimal Control</h3>
+
             <p>
-              Mathematical and computational tools for autonomous robotic
-              systems.
+              Optimization-based approaches to control, estimation,
+              and decision-making for dynamic systems.
             </p>
           </article>
+
 
           <article class="research-card">
             <span class="project-number">05</span>
-            <h3>Mathematical Modeling</h3>
+
+            <div class="mini-phase">
+              <svg viewBox="0 0 180 55">
+                <path d="M15 12 C75 5 155 15 155 28 C155 45 65 48 35 32 C15 20 40 12 70 20"/>
+              </svg>
+            </div>
+
+            <h3>Autonomous Systems</h3>
+
             <p>
-              Understanding dynamic systems through equations, structure,
-              and computation.
+              Control and decision-making for systems operating
+              with limited human intervention.
             </p>
           </article>
 
+
           <article class="research-card">
             <span class="project-number">06</span>
-            <h3>Computational Methods</h3>
+
+            <div class="mini-matrix">
+              <span>A</span>
+              <span>B</span>
+              <span>C</span>
+              <span>D</span>
+            </div>
+
+            <h3>Mathematical Modeling</h3>
+
             <p>
-              Python, MATLAB, simulation, and numerical methods for
-              dynamical systems.
+              Using equations, linear algebra, simulation, and
+              numerical methods to understand physical systems.
             </p>
           </article>
 
         </div>
 
 
-        <!-- Current research affiliation -->
+        <!-- AFFILIATION -->
 
         <div class="affiliation">
-          <p class="section-label">Current affiliation</p>
-          <strong>EnerBots Lab · IIT Guwahati</strong>
-          <p>Working under the supervision of Prof. Prabir Barooah.</p>
-          <p>PhD · 2026 — Present</p>
+
+          <p class="section-label">
+            Current affiliation
+          </p>
+
+          <strong>
+            EnerBots Lab · IIT Guwahati
+          </strong>
+
+          <p>
+            Working under the supervision of Prof. Prabir Barooah.
+          </p>
+
+          <p>
+            PhD · 2026 — Present
+          </p>
+
         </div>
 
       </div>
@@ -209,45 +375,106 @@
     <!-- ================= EDUCATION ================= -->
 
     <section id="education">
+
       <div class="container">
 
         <div class="section-header">
           <p class="section-label">02 · Education</p>
-          <h2 class="section-title">Academic journey</h2>
+
+          <h2 class="section-title">
+            Academic journey
+          </h2>
         </div>
+
 
         <div class="timeline">
 
           <div class="timeline-item">
-            <span class="timeline-year">2026 — Present</span>
-            <h3>PhD Research Scholar</h3>
+
+            <span class="timeline-year">
+              2026 — Present
+            </span>
+
+            <h3>
+              PhD Research Scholar
+            </h3>
+
             <p>
               Department of Electrical &amp; Electronics Engineering ·
               Indian Institute of Technology Guwahati
             </p>
-            <p>Control Systems · Systems &amp; Control</p>
-            <p>Supervisor: Prof. Prabir Barooah</p>
+
+            <p>
+              Control Systems · Systems &amp; Control
+            </p>
+
+            <p>
+              Supervisor: Prof. Prabir Barooah
+            </p>
+
           </div>
 
-          <div class="timeline-item">
-            <span class="timeline-year">2020 — 2024</span>
-            <h3>B.Tech in Electrical Engineering</h3>
-            <p>National Institute of Technology Silchar</p>
-            <p>CGPA: 8.37 / 10</p>
-          </div>
 
           <div class="timeline-item">
-            <span class="timeline-year">2019</span>
-            <h3>Class XII</h3>
-            <p>Jawahar Navodaya Vidyalaya, Cachar, Assam</p>
-            <p>94.2%</p>
+
+            <span class="timeline-year">
+              2020 — 2024
+            </span>
+
+            <h3>
+              B.Tech in Electrical Engineering
+            </h3>
+
+            <p>
+              National Institute of Technology Silchar
+            </p>
+
+            <p>
+              CGPA: 8.37 / 10
+            </p>
+
           </div>
 
+
           <div class="timeline-item">
-            <span class="timeline-year">2017</span>
-            <h3>Class X</h3>
-            <p>Jawahar Navodaya Vidyalaya, Cachar, Assam</p>
-            <p>10.0 CGPA</p>
+
+            <span class="timeline-year">
+              2019
+            </span>
+
+            <h3>
+              Class XII
+            </h3>
+
+            <p>
+              Jawahar Navodaya Vidyalaya, Cachar, Assam
+            </p>
+
+            <p>
+              94.2%
+            </p>
+
+          </div>
+
+
+          <div class="timeline-item">
+
+            <span class="timeline-year">
+              2017
+            </span>
+
+            <h3>
+              Class X
+            </h3>
+
+            <p>
+              Jawahar Navodaya Vidyalaya, Cachar, Assam
+            </p>
+
+            <p>
+              10.0 CGPA
+            </p>
+
           </div>
 
         </div>
@@ -259,16 +486,55 @@
     <!-- ================= PUBLICATIONS ================= -->
 
     <section class="section-alt" id="publications">
+
       <div class="container">
 
         <div class="section-header">
-          <p class="section-label">03 · Publications</p>
-          <h2 class="section-title">Selected publication</h2>
+
+          <p class="section-label">
+            03 · Publications
+          </p>
+
+          <h2 class="section-title">
+            Selected publication
+          </h2>
+
         </div>
+
 
         <article class="publication">
 
-          <h3>Wind Power Forecasting Using LSTM-Grid Search</h3>
+          <div class="publication-visual">
+
+            <svg viewBox="0 0 600 150">
+
+              <path
+                class="response-grid"
+                d="M0 30 H600 M0 75 H600 M0 120 H600"
+              />
+
+              <path
+                class="response-curve"
+                d="
+                  M0 120
+                  L70 120
+                  C90 120 100 30 135 30
+                  C170 30 170 85 210 85
+                  C250 85 250 48 300 48
+                  C350 48 350 65 400 65
+                  C450 65 450 55 510 55
+                  C550 55 570 58 600 58
+                "
+              />
+
+            </svg>
+
+          </div>
+
+
+          <h3>
+            Wind Power Forecasting Using LSTM-Grid Search
+          </h3>
 
           <div class="publication-meta">
             IEEE · Conference Paper · 2024
@@ -280,12 +546,23 @@
           </p>
 
           <div class="hero-meta">
-            <span class="tag">Wind Power Forecasting</span>
-            <span class="tag">Machine Learning</span>
-            <span class="tag">Time Series</span>
+
+            <span class="tag">
+              Wind Power Forecasting
+            </span>
+
+            <span class="tag">
+              Machine Learning
+            </span>
+
+            <span class="tag">
+              Time Series
+            </span>
+
           </div>
 
         </article>
+
 
         <p class="publication-footnote">
           More publications will be added as my research progresses.
@@ -298,45 +575,87 @@
     <!-- ================= PROJECTS ================= -->
 
     <section id="projects">
+
       <div class="container">
 
         <div class="section-header">
-          <p class="section-label">04 · Projects</p>
-          <h2 class="section-title">Things I have worked on</h2>
+
+          <p class="section-label">
+            04 · Projects
+          </p>
+
+          <h2 class="section-title">
+            Things I have worked on
+          </h2>
+
         </div>
+
 
         <div class="projects-grid">
 
           <article class="project-card">
-            <span class="project-number">01 · Machine Learning · Energy</span>
-            <h3>Wind Power Forecasting</h3>
+
+            <span class="project-number">
+              01 · MACHINE LEARNING · ENERGY
+            </span>
+
+            <h3>
+              Wind Power Forecasting
+            </h3>
+
             <p>
-              Forecasting wind power from SCADA data using LSTM-based
-              models and grid-search optimization.
+              Forecasting wind power from SCADA data using
+              LSTM-based models and grid-search optimization.
             </p>
+
             <div class="project-stack">
               Python · TensorFlow · Scikit-learn · Time Series
             </div>
+
           </article>
 
-          <article class="project-card">
-            <span class="project-number">02 · Control · Simulation</span>
-            <h3>Control Systems Studies</h3>
-            <p>
-              Computational work with state-space models, estimation,
-              optimization, and feedback control.
-            </p>
-            <div class="project-stack">MATLAB · Python · CasADi</div>
-          </article>
 
           <article class="project-card">
-            <span class="project-number">03 · Autonomous Systems</span>
-            <h3>Robotics &amp; Autonomous Systems</h3>
+
+            <span class="project-number">
+              02 · CONTROL · SIMULATION
+            </span>
+
+            <h3>
+              Control Systems Studies
+            </h3>
+
             <p>
-              Exploring mathematical and computational methods for
-              autonomous robotic systems during my PhD journey.
+              Computational work with state-space models,
+              estimation, optimization, and feedback control.
             </p>
-            <div class="project-stack">Modeling · Simulation · Control</div>
+
+            <div class="project-stack">
+              MATLAB · Python · CasADi
+            </div>
+
+          </article>
+
+
+          <article class="project-card">
+
+            <span class="project-number">
+              03 · AUTONOMOUS SYSTEMS
+            </span>
+
+            <h3>
+              Robotics &amp; Autonomous Systems
+            </h3>
+
+            <p>
+              Exploring mathematical and computational methods
+              for autonomous robotic systems during my PhD journey.
+            </p>
+
+            <div class="project-stack">
+              Modeling · Simulation · Control
+            </div>
+
           </article>
 
         </div>
@@ -348,49 +667,102 @@
     <!-- ================= NOTES ================= -->
 
     <section class="section-alt" id="notes">
+
       <div class="container">
 
         <div class="section-header">
-          <p class="section-label">05 · Research Notes</p>
-          <h2 class="section-title">Learning in public</h2>
+
+          <p class="section-label">
+            05 · Research Notes
+          </p>
+
+          <h2 class="section-title">
+            Learning in public
+          </h2>
+
           <p class="section-intro">
             A future collection of notes, tutorials, and mathematical
             explorations from my PhD journey.
           </p>
+
         </div>
+
 
         <div class="notes-list">
 
           <div class="note">
+
             <div>
-              <div class="note-title">Linear Algebra for Control</div>
-              <div class="note-description">Notes &amp; explanations</div>
+              <div class="note-title">
+                Linear Algebra for Control
+              </div>
+
+              <div class="note-description">
+                Notes &amp; explanations
+              </div>
             </div>
-            <span class="note-status">Coming soon</span>
+
+            <span class="note-status">
+              Coming soon
+            </span>
+
           </div>
 
-          <div class="note">
-            <div>
-              <div class="note-title">Linear Systems Theory</div>
-              <div class="note-description">Concepts, intuition &amp; examples</div>
-            </div>
-            <span class="note-status">Coming soon</span>
-          </div>
 
           <div class="note">
+
             <div>
-              <div class="note-title">Python for Control</div>
-              <div class="note-description">Numerical experiments &amp; simulations</div>
+              <div class="note-title">
+                Linear Systems Theory
+              </div>
+
+              <div class="note-description">
+                Concepts, intuition &amp; examples
+              </div>
             </div>
-            <span class="note-status">Coming soon</span>
+
+            <span class="note-status">
+              Coming soon
+            </span>
+
           </div>
 
+
           <div class="note">
+
             <div>
-              <div class="note-title">Mathematics of Music</div>
-              <div class="note-description">Fourier analysis, linear algebra &amp; sound</div>
+              <div class="note-title">
+                Python for Control
+              </div>
+
+              <div class="note-description">
+                Numerical experiments &amp; simulations
+              </div>
             </div>
-            <span class="note-status">Coming soon</span>
+
+            <span class="note-status">
+              Coming soon
+            </span>
+
+          </div>
+
+
+          <div class="note">
+
+            <div>
+              <div class="note-title">
+                Mathematics of Music
+              </div>
+
+              <div class="note-description">
+                Fourier analysis, linear algebra &amp; sound
+              </div>
+            </div>
+
+            <span class="note-status">
+              Coming soon
+            </span>
+
           </div>
 
         </div>
@@ -401,6 +773,73 @@
 
     <!-- ================= CONTACT ================= -->
 
+    <section class="contact" id="contact">
+
+      <div class="container">
+
+        <div class="section-header">
+
+          <p class="section-label">
+            06 · Contact
+          </p>
+
+          <h2 class="section-title">
+            Let's connect.
+          </h2>
+
+          <p class="contact-text">
+            If you are interested in control systems, autonomous
+            systems, mathematics, or research, feel free to reach out.
+          </p>
+
+        </div>
+
+
+        <div class="contact-system">
+
+          <span>r(t)</span>
+
+          <div class="feedback-node">
+            <span>+</span>
+            <span>−</span>
+          </div>
+
+          <div class="controller">
+            CONTROLLER
+          </div>
+
+          <div class="signal-line"></div>
+
+          <div class="plant">
+            PLANT
+          </div>
+
+          <div class="signal-output">
+            y(t)
+          </div>
+
+        </div>
+
+
+        <div class="contact-links">
+
+          <a href="mailto:mrinmoysingha064@gmail.com">
+            Email
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/mrinmoysingha/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
 
   </main>
 
@@ -408,14 +847,20 @@
   <!-- ================= FOOTER ================= -->
 
   <footer>
+
     <div class="container footer-inner">
-      <span>© 2026 Mrinmoy Singha</span>
-      <span>Built for research, learning &amp; curiosity.</span>
+
+      <span>
+        © 2026 Mrinmoy Singha
+      </span>
+
+      <span>
+        ẋ = Ax + Bu
+      </span>
+
     </div>
+
   </footer>
 
 
   <script src="script.js"></script>
-
-</body>
-</html>
