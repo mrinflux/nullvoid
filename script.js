@@ -1,120 +1,71 @@
-// =========================================================
-// MRINMOY SINGHA — CONTROL SYSTEMS WEBSITE
-// =========================================================
+/* =========================================================
+   MRINMOY SINGHA — ACADEMIC WEBSITE
+   Light Mode Only
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* ================= LIGHT MODE ================= */
+
+    // Force light mode regardless of the device's system theme
+    document.documentElement.setAttribute("data-theme", "light");
 
 
-// ================= THEME =================
+    /* ================= SMOOTH SCROLL ================= */
 
-const root = document.documentElement;
-const themeButton = document.getElementById("theme");
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
 
+        link.addEventListener("click", function (e) {
 
-function getStoredTheme() {
-  try {
-    return localStorage.getItem("theme");
-  } catch (error) {
-    return null;
-  }
-}
+            const target = document.querySelector(
+                this.getAttribute("href")
+            );
 
+            if (target) {
+                e.preventDefault();
 
-function storeTheme(theme) {
-  try {
-    localStorage.setItem("theme", theme);
-  } catch (error) {
-    // Theme still works for this visit.
-  }
-}
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
 
+        });
 
-function applyTheme(theme) {
-
-  const isDark = theme === "dark";
-
-  root.dataset.theme = isDark ? "dark" : "light";
-
-  if (themeButton) {
-
-    themeButton.textContent = isDark ? "☀" : "☾";
-
-    themeButton.setAttribute(
-      "aria-label",
-      isDark
-        ? "Switch to light mode"
-        : "Switch to dark mode"
-    );
-  }
-}
+    });
 
 
-const savedTheme = getStoredTheme();
+    /* ================= CURRENT YEAR ================= */
 
-const systemPrefersDark = window.matchMedia(
-  "(prefers-color-scheme: dark)"
-).matches;
+    const yearElements = document.querySelectorAll("[data-year]");
 
-
-applyTheme(
-  savedTheme ||
-  (systemPrefersDark ? "dark" : "light")
-);
+    yearElements.forEach(element => {
+        element.textContent = new Date().getFullYear();
+    });
 
 
-// ================= THEME TOGGLE =================
+    /* ================= CONTROL SYSTEM STATUS ================= */
 
-if (themeButton) {
+    const statusDot = document.querySelector(".status-dot");
 
-  themeButton.addEventListener("click", () => {
+    if (statusDot) {
 
-    const newTheme =
-      root.dataset.theme === "dark"
-        ? "light"
-        : "dark";
+        let startTime = performance.now();
 
-    applyTheme(newTheme);
+        function animateStatus(time) {
 
-    storeTheme(newTheme);
-  });
-}
+            const elapsed = time - startTime;
 
+            // Subtle pulsing effect
+            const opacity =
+                0.55 + 0.45 * (0.5 + 0.5 * Math.sin(elapsed / 500));
 
-// ================= SYSTEM STATUS =================
+            statusDot.style.opacity = opacity;
 
-// Gives the hero a subtle "alive" state-system feel.
+            requestAnimationFrame(animateStatus);
+        }
 
-const statusDot =
-  document.querySelector(".status-dot");
+        requestAnimationFrame(animateStatus);
+    }
 
-
-if (statusDot) {
-
-  let phase = 0;
-
-  function updateSystem() {
-
-    phase += 0.025;
-
-    const intensity =
-      0.55 +
-      Math.sin(phase) * 0.35;
-
-    statusDot.style.opacity =
-      intensity.toFixed(2);
-
-    requestAnimationFrame(updateSystem);
-  }
-
-  updateSystem();
-}
-
-
-// ================= CURRENT YEAR =================
-
-const yearElements =
-  document.querySelectorAll("[data-year]");
-
-
-yearElements.forEach((element) => {
-  element.textContent =
-    new Date().getFullYear();
 });
